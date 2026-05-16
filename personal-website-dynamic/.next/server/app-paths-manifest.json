@@ -1,0 +1,8 @@
+{
+  "/_global-error/page": "app/_global-error/page.js",
+  "/_not-found/page": "app/_not-found/page.js",
+  "/blogs/first-post/page": "app/blogs/first-post/page.js",
+  "/blogs/frc-worlds/page": "app/blogs/frc-worlds/page.js",
+  "/experience/page": "app/experience/page.js",
+  "/page": "app/page.js"
+}
