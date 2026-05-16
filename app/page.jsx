@@ -103,11 +103,11 @@ export default function Home() {
               <p className="text-sm text-slate-500 mb-2">2025 – 2026</p>
               <h3 className="font-display text-xl font-bold mb-1">Programming Member</h3>
               <p className="text-sm text-sky-400 mb-3">FRC Team 7520</p>
-              <ul className="text-slate-400 text-sm space-y-1">
-                <li className="flex items-start gap-2"><span className="text-sky-400 mt-1">•</span>Developed robot software including a turret subsystem for the 2026 REBUILT season</li>
-                <li className="flex items-start gap-2"><span className="text-sky-400 mt-1">•</span>Turret subsystem tracked and shot at a target based on its position on the field and its velocity.</li>
-                <li className="flex items-start gap-2"><span className="text-sky-400 mt-1">•</span>The turret was able to score at a 95%+ accuracy, leading us to become one of the top 4% teams in the world (ranked 149/3724 on statbotics)</li>
-                <li className="flex items-start gap-2"><span className="text-sky-400 mt-1">•</span>Qualified for the FIRST Championship, which only 19 of 119 Ontario teams attend</li>
+              <ul className="text-slate-400 text-sm space-y-1 list-disc pl-4 marker:text-sky-400">
+                <li>Developed robot software including a turret subsystem for the 2026 REBUILT season</li>
+                <li>Turret subsystem tracked and shot at a target based on its position on the field and its velocity.</li>
+                <li>The turret was able to score at a 95%+ accuracy, leading us to become one of the top 4% teams in the world (ranked 149/3724 on statbotics)</li>
+                <li>Qualified for the FIRST Championship, which only 19 of 119 Ontario teams attend</li>
               </ul>
             </div>
           </div>
