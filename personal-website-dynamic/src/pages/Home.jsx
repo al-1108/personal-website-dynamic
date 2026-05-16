@@ -80,7 +80,7 @@ export default function Home() {
       </header>
 
       {/* Intro */}
-      <div id="intro" className="max-w-4xl mx-auto px-6 py-12 sm:py-20">
+      <div id="intro" className="scroll-mt-16 max-w-4xl mx-auto px-6 py-12 sm:py-20">
         <div className="flex flex-col md:flex-row items-center justify-center gap-6 sm:gap-8">
           <div className="flex-1 text-center">
             <p className="text-base sm:text-lg text-slate-400 mb-4">Incoming Waterloo Computer Science Student</p>
@@ -93,7 +93,7 @@ export default function Home() {
       </div>
 
       {/* Experience */}
-      <div id="experience" className="bg-slate-800 py-12 sm:py-16">
+      <div id="experience" className="scroll-mt-16 bg-slate-800 py-12 sm:py-16">
         <div className="max-w-4xl mx-auto px-6">
           <h2 className="font-display text-2xl sm:text-3xl font-bold mb-8">Experience</h2>
           <div className="grid gap-6">
@@ -114,7 +114,7 @@ export default function Home() {
       </div>
 
       {/* Projects */}
-      <div id="projects" className="max-w-4xl mx-auto px-6 py-12 sm:py-16">
+      <div id="projects" className="scroll-mt-16 max-w-4xl mx-auto px-6 py-12 sm:py-16">
         <h2 className="font-display text-2xl sm:text-3xl font-bold mb-8">My Projects</h2>
         <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-4">
           <a href="https://github.com/al-1108/Personal-Portfolio-Website" target="_blank" rel="noopener noreferrer"
@@ -154,7 +154,7 @@ export default function Home() {
       </div>
 
       {/* Skills */}
-      <div id="skills" className="bg-slate-800 py-12 sm:py-16">
+      <div id="skills" className="scroll-mt-16 bg-slate-800 py-12 sm:py-16">
         <div className="max-w-4xl mx-auto px-6">
           <h2 className="font-display text-2xl sm:text-3xl font-bold mb-8">Languages/Frameworks</h2>
           <p className="text-base sm:text-lg text-slate-300 mb-12">C#, Java, Python, HTML, CSS, JS</p>
@@ -162,7 +162,7 @@ export default function Home() {
       </div>
 
       {/* Blogs */}
-      <div id="blogs" className="max-w-4xl mx-auto px-6 py-12 sm:py-16">
+      <div id="blogs" className="scroll-mt-16 max-w-4xl mx-auto px-6 py-12 sm:py-16">
         <h2 className="font-display text-2xl sm:text-3xl font-bold mb-8">Blogs</h2>
         <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-4">
           <Link to="/blogs/frc-worlds" className="bg-slate-800 flex flex-col justify-between border border-slate-700 rounded-xl p-4 hover:border-sky-500 hover:shadow-lg hover:shadow-sky-900/20 transition group">
@@ -185,7 +185,7 @@ export default function Home() {
       </div>
 
       {/* Contact */}
-      <div id="contact" className="bg-slate-800 py-12 sm:py-16">
+      <div id="contact" className="scroll-mt-16 bg-slate-800 py-12 sm:py-16">
         <div className="max-w-4xl mx-auto px-6">
           <h2 className="font-display text-2xl sm:text-3xl font-bold mb-3">Contact Me</h2>
           <p className="text-slate-400 mb-8">alexlu890@gmail.com</p>
