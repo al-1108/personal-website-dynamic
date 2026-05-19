@@ -1,6 +1,8 @@
 import { createClient } from '@supabase/supabase-js'
 import HomeClient from './HomeClient'
 
+export const dynamic = 'force-dynamic'
+
 export default async function Page() {
   const supabase = createClient(
     process.env.SUPABASE_URL,
