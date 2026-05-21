@@ -14,11 +14,15 @@ export default async function Page() {
     { data: educationData },
     { data: blogs },
     { data: experiences },
+    { data: skills },
+    { data: projects},
   ] = await Promise.all([
     supabase.from('welcome').select('message').single(),
     supabase.from('education').select('message').single(),
     supabase.from('blogs').select('slug, title, description, date').order('date', { ascending: false }),
     supabase.from('experiences').select('id, years, title, company, bullets').order('id', { ascending: false }).limit(2),
+    supabase.from('skills').select('languages').single(),
+    supabase.from('projects').select('id, years, title, desc, github, image').order('id', { ascending: false }),
   ])
 
   return (
@@ -27,6 +31,8 @@ export default async function Page() {
       educationMessage={educationData?.message ?? ''}
       blogs={blogs ?? []}
       experiences={experiences ?? []}
+      skills={skills?.languages ?? ''}
+      projects={projects ?? []}
     />
   )
 }

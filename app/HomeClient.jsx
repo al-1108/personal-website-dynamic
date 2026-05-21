@@ -10,15 +10,15 @@ const GitHubIcon = () => (
 )
 
 const navLinks = [
-  { href: '#intro', label: 'Home' },
-  { href: '#experience', label: 'Experience' },
-  { href: '#projects', label: 'Projects' },
-  { href: '#skills', label: 'Skills' },
-  { href: '#blogs', label: 'Blogs' },
-  { href: '#contact', label: 'Contact' },
+  { href: '#intro', label: 'home' },
+  { href: '#experience', label: 'experience' },
+  { href: '#projects', label: 'projects' },
+  { href: '#skills', label: 'skills' },
+  { href: '#blogs', label: 'blogs' },
+  { href: '#contact', label: 'contact' },
 ]
 
-export default function HomeClient({ welcomeMessage, educationMessage, blogs, experiences }) {
+export default function HomeClient({ welcomeMessage, educationMessage, blogs, experiences, skills, projects }) {
   const [menuOpen, setMenuOpen] = useState(false)
 
   useEffect(() => {
@@ -40,7 +40,7 @@ export default function HomeClient({ welcomeMessage, educationMessage, blogs, ex
           <ul className="hidden md:flex gap-8 text-base text-slate-300">
             {navLinks.map(({ href, label }) => (
               <li key={href}>
-                <a href={href} className="inline-flex hover:text-sky-400 hover:scale-110 transition origin-center">{label}</a>
+                <a href={href} className="hover:underline inline-flex hover:text-sky-400 hover:scale-110 transition origin-center">{label}</a>
               </li>
             ))}
           </ul>
@@ -120,39 +120,19 @@ export default function HomeClient({ welcomeMessage, educationMessage, blogs, ex
       <div id="projects" className="scroll-mt-16 max-w-4xl mx-auto px-6 py-12 sm:py-16">
         <h2 className="font-display text-2xl sm:text-3xl font-bold mb-8">My Projects</h2>
         <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-4">
-          <a href="https://github.com/al-1108/Personal-Portfolio-Website" target="_blank" rel="noopener noreferrer"
-            style={{ backgroundImage: "linear-gradient(rgba(15,23,42,0.70), rgba(15,23,42,0.70)), url('/images/logo.png')" }}
-            className="flex flex-col justify-between border border-slate-700 rounded-xl p-4 hover:border-sky-500 hover:shadow-lg hover:shadow-sky-900/20 transition group bg-cover bg-center">
-            <div>
-              <GitHubIcon />
-              <p className="text-xs text-slate-300 mb-1 group-hover:text-sky-400">2026</p>
-              <h3 className="font-display text-2xl sm:text-xl font-bold group-hover:text-sky-400 transition mb-2">Personal Portfolio Website</h3>
-              <p className="text-slate-300 text-sm leading-relaxed">This website! Built with HTML, Tailwind, and (tbd).</p>
-            </div>
-            <span className="text-sky-400 text-base font-medium group-hover:scale-110 group-hover:translate-x-3 transition-transform inline-block mt-2">GitHub →</span>
-          </a>
-          <a href="https://github.com/RyanHuangcodes/CPT_ICS4U" target="_blank" rel="noopener noreferrer"
-            style={{ backgroundImage: "linear-gradient(rgba(15,23,42,0.70), rgba(15,23,42,0.70)), url('/images/skellies.png')" }}
-            className="flex flex-col justify-between border border-slate-700 rounded-xl p-4 hover:border-sky-500 hover:shadow-lg hover:shadow-sky-900/20 transition group bg-cover bg-center">
-            <div>
-              <GitHubIcon />
-              <p className="text-xs text-slate-300 mb-1 group-hover:text-sky-400">2025</p>
-              <h3 className="font-display text-2xl sm:text-xl font-bold group-hover:text-sky-400 transition mb-2">Skellies</h3>
-              <p className="text-slate-300 text-sm leading-relaxed">Collaborated on a Unity tower defense game for a computer science CPT, where players place towers to defend their base from zombies that grow stronger each wave.</p>
-            </div>
-            <span className="text-sky-400 text-base font-medium group-hover:scale-110 group-hover:translate-x-3 transition-transform inline-block mt-2">GitHub →</span>
-          </a>
-          <a href="https://github.com/dvergeldedios/Dodgesquare" target="_blank" rel="noopener noreferrer"
-            style={{ backgroundImage: "linear-gradient(rgba(15,23,42,0.70), rgba(15,23,42,0.70)), url('/images/dodgesquare.png')" }}
-            className="flex flex-col justify-between border border-slate-700 rounded-xl p-4 hover:border-sky-500 hover:shadow-lg hover:shadow-sky-900/20 transition group bg-cover bg-center">
-            <div>
-              <GitHubIcon />
-              <p className="text-xs text-slate-300 mb-1 group-hover:text-sky-400">2025</p>
-              <h3 className="font-display text-2xl sm:text-xl font-bold group-hover:text-sky-400 transition mb-2">Dodgesquare</h3>
-              <p className="text-slate-300 text-sm leading-relaxed">Collaborated on a Unity game for a computer science class. Dodge falling obstacles that increase in number and speed over time!</p>
-            </div>
-            <span className="text-sky-400 text-base font-medium group-hover:scale-110 group-hover:translate-x-3 transition-transform inline-block mt-2">GitHub →</span>
-          </a>
+          {projects.map((project) => (
+            <a key={project.id} href={project.github} target="_blank" rel="noopener noreferrer"
+              style={{ backgroundImage: `linear-gradient(rgba(15,23,42,0.70), rgba(15,23,42,0.70)), url('/images/${project.image}')` }}
+              className="flex flex-col justify-between border border-slate-700 rounded-xl p-4 hover:border-sky-500 hover:shadow-lg hover:shadow-sky-900/20 transition group bg-cover bg-center">
+              <div>
+                <GitHubIcon />
+                <p className="text-xs text-slate-300 mb-1 group-hover:text-sky-400">{project.years}</p>
+                <h3 className="font-display text-2xl sm:text-xl font-bold group-hover:text-sky-400 transition mb-2">{project.title}</h3>
+                <p className="text-slate-300 text-sm leading-relaxed">{project.desc}</p>
+              </div>
+              <span className="text-sky-400 text-base font-medium group-hover:scale-110 group-hover:translate-x-3 transition-transform inline-block mt-2 group-hover:underline">GitHub →</span>
+            </a>
+          ))}
         </div>
       </div>
 
@@ -160,7 +140,7 @@ export default function HomeClient({ welcomeMessage, educationMessage, blogs, ex
       <div id="skills" className="scroll-mt-16 bg-slate-800 py-12 sm:py-16">
         <div className="max-w-4xl mx-auto px-6">
           <h2 className="font-display text-2xl sm:text-3xl font-bold mb-8">Languages/Frameworks</h2>
-          <p className="text-base sm:text-lg text-slate-300 mb-12">C#, Java, Python, HTML, CSS, JS</p>
+          <p className="text-base sm:text-lg text-slate-300 mb-12">{skills}</p>
         </div>
       </div>
 
