@@ -18,7 +18,7 @@ const navLinks = [
   { href: '#contact', label: 'Contact' },
 ]
 
-export default function HomeClient({ welcomeMessage }) {
+export default function HomeClient({ welcomeMessage, educationMessage, blogs }) {
   const [menuOpen, setMenuOpen] = useState(false)
 
   useEffect(() => {
@@ -85,7 +85,7 @@ export default function HomeClient({ welcomeMessage }) {
       <div id="intro" className="scroll-mt-16 max-w-4xl mx-auto px-6 py-12 sm:py-20">
         <div className="flex flex-col md:flex-row items-center justify-center gap-6 sm:gap-8">
           <div className="flex-1 text-center">
-            <p className="text-base sm:text-lg text-slate-400 mb-4">Incoming Waterloo Computer Science Student</p>
+            <p className="text-base sm:text-lg text-slate-400 mb-4">{educationMessage}</p>
             <p className="font-display text-2xl sm:text-3xl font-bold mb-2">{welcomeMessage}</p>
           </div>
           <div className="flex-1 w-full flex justify-center md:justify-end items-center">
@@ -167,22 +167,16 @@ export default function HomeClient({ welcomeMessage }) {
       <div id="blogs" className="scroll-mt-16 max-w-4xl mx-auto px-6 py-12 sm:py-16">
         <h2 className="font-display text-2xl sm:text-3xl font-bold mb-8">Blogs</h2>
         <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-4">
-          <Link href="/blogs/frc-worlds" className="bg-slate-800 flex flex-col justify-between border border-slate-700 rounded-xl p-4 hover:border-sky-500 hover:shadow-lg hover:shadow-sky-900/20 transition group">
-            <div>
-              <p className="text-sm text-slate-500 mb-2">May 11, 2026</p>
-              <h3 className="font-display text-xl font-bold mb-3 group-hover:text-sky-400 transition">FIRST Championship Experience</h3>
-              <p className="text-slate-400 leading-relaxed text-sm">This post goes over my experience at the 2026 FIRST Championship event!</p>
-            </div>
-            <span className="inline-block mt-4 text-sky-400 text-sm font-medium group-hover:translate-x-1 group-hover:scale-110 transition-transform origin-left">Read more →</span>
-          </Link>
-          <Link href="/blogs/first-post" className="bg-slate-800 flex flex-col justify-between border border-slate-700 rounded-xl p-4 hover:border-sky-500 hover:shadow-lg hover:shadow-sky-900/20 transition group">
-            <div>
-              <p className="text-sm text-slate-500 mb-2">May 10, 2026</p>
-              <h3 className="font-display text-xl font-bold mb-3 group-hover:text-sky-400 transition">My First Blog Post</h3>
-              <p className="text-slate-400 leading-relaxed text-sm">This is my first post! Learn more about my journey as a developer, my interests, and my experiences!</p>
-            </div>
-            <span className="inline-block mt-4 text-sky-400 text-sm font-medium group-hover:translate-x-1 group-hover:scale-110 transition-transform origin-left">Read more →</span>
-          </Link>
+          {blogs.map((post) => (
+            <Link key={post.slug} href={`/blogs/${post.slug}`} className="bg-slate-800 flex flex-col justify-between border border-slate-700 rounded-xl p-4 hover:border-sky-500 hover:shadow-lg hover:shadow-sky-900/20 transition group">
+              <div>
+                <p className="text-sm text-slate-500 mb-2">{post.date}</p>
+                <h3 className="font-display text-xl font-bold mb-3 group-hover:text-sky-400 transition">{post.title}</h3>
+                <p className="text-slate-400 leading-relaxed text-sm">{post.description}</p>
+              </div>
+              <span className="inline-block mt-4 text-sky-400 text-sm font-medium group-hover:translate-x-1 group-hover:scale-110 transition-transform origin-left">Read more →</span>
+            </Link>
+          ))}
         </div>
       </div>
 

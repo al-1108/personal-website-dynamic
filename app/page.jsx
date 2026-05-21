@@ -9,10 +9,21 @@ export default async function Page() {
     process.env.SUPABASE_ANON_KEY
   )
 
-  const { data } = await supabase
-    .from('welcome')
-    .select('message')
-    .single()
+  const [
+    { data: welcomeData },
+    { data: educationData },
+    { data: blogs },
+  ] = await Promise.all([
+    supabase.from('welcome').select('message').single(),
+    supabase.from('education').select('message').single(),
+    supabase.from('blogs').select('slug, title, description, date').order('date', { ascending: false }),
+  ])
 
-  return <HomeClient welcomeMessage={data?.message ?? ''} />
+  return (
+    <HomeClient
+      welcomeMessage={welcomeData?.message ?? ''}
+      educationMessage={educationData?.message ?? ''}
+      blogs={blogs ?? []}
+    />
+  )
 }
