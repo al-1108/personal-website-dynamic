@@ -13,10 +13,12 @@ export default async function Page() {
     { data: welcomeData },
     { data: educationData },
     { data: blogs },
+    { data: experiences },
   ] = await Promise.all([
     supabase.from('welcome').select('message').single(),
     supabase.from('education').select('message').single(),
     supabase.from('blogs').select('slug, title, description, date').order('date', { ascending: false }),
+    supabase.from('experiences').select('id, years, title, company, bullets').order('id', { ascending: false }).limit(2),
   ])
 
   return (
@@ -24,6 +26,7 @@ export default async function Page() {
       welcomeMessage={welcomeData?.message ?? ''}
       educationMessage={educationData?.message ?? ''}
       blogs={blogs ?? []}
+      experiences={experiences ?? []}
     />
   )
 }

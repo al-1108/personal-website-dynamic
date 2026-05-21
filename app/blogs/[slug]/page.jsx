@@ -13,7 +13,7 @@ export default async function BlogPost({ params }) {
 
   const { data: post } = await supabase
     .from('blogs')
-    .select('title, date, content')
+    .select('title, date, content, image, image-desc')
     .eq('slug', slug)
     .single()
 
@@ -33,6 +33,11 @@ export default async function BlogPost({ params }) {
         <h1 className="font-display text-4xl sm:text-5xl font-bold mb-8">{post.title}</h1>
         <div className="text-slate-300 leading-relaxed space-y-6">
           {post.content}
+        </div>
+        <br></br>
+        <br></br>
+        <div>
+          <img src={`/images/${post.image}`} alt={post['image-desc']} className="w-[45%] rounded-lg shadow-lg mx-auto block"/>
         </div>
       </article>
     </div>
