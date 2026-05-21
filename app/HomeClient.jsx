@@ -112,7 +112,7 @@ export default function HomeClient({ welcomeMessage, educationMessage, blogs, ex
               </div>
             ))}
           </div>
-          <Link href="/experience" className="inline-block mt-6 text-sky-400 text-sm font-medium hover:translate-x-1 hover:scale-110 transition-transform origin-left">See all experiences →</Link>
+          <Link href="/experience" className="inline-block mt-6 text-sky-400 text-sm font-medium hover:translate-x-1 hover:scale-110 transition-transform origin-left hover:underline">See all experiences →</Link>
         </div>
       </div>
 
@@ -155,7 +155,7 @@ export default function HomeClient({ welcomeMessage, educationMessage, blogs, ex
                 <h3 className="font-display text-xl font-bold mb-3 group-hover:text-sky-400 transition">{post.title}</h3>
                 <p className="text-slate-400 leading-relaxed text-sm">{post.description}</p>
               </div>
-              <span className="inline-block mt-4 text-sky-400 text-sm font-medium group-hover:translate-x-1 group-hover:scale-110 transition-transform origin-left">Read more →</span>
+              <span className="inline-block mt-4 text-sky-400 text-sm font-medium group-hover:translate-x-3 group-hover:scale-110 transition-transform origin-lef group-hover:underline">Read more →</span>
             </Link>
           ))}
         </div>
