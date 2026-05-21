@@ -155,7 +155,7 @@ export default function HomeClient({ welcomeMessage, educationMessage, blogs, ex
                 <h3 className="font-display text-xl font-bold mb-3 group-hover:text-sky-400 transition">{post.title}</h3>
                 <p className="text-slate-400 leading-relaxed text-sm">{post.description}</p>
               </div>
-              <span className="inline-block mt-4 text-sky-400 text-sm font-medium group-hover:translate-x-3 group-hover:scale-110 transition-transform origin-lef group-hover:underline">Read more →</span>
+              <span className="inline-block mt-4 text-sky-400 text-sm font-medium group-hover:translate-x-4 group-hover:scale-110 transition-transform origin-lef group-hover:underline">Read more →</span>
             </Link>
           ))}
         </div>
