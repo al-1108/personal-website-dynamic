@@ -1,6 +1,6 @@
 'use client'
 
-import { useEffect, useState } from 'react'
+import { useEffect, useRef, useState } from 'react'
 import Link from 'next/link'
 
 const GitHubIcon = () => (
@@ -20,6 +20,22 @@ const navLinks = [
 
 export default function HomeClient({ welcomeMessage, educationMessage, blogs, experiences, skills, projects }) {
   const [menuOpen, setMenuOpen] = useState(false)
+  const [emoji, setEmoji] = useState('🫩')
+  const emojiRef = useRef(null)
+
+  useEffect(() => {
+    const directional = ['🌝', '🧐', '🙄', '🥴', '😒', '🫠', '😔', '🐤']
+    const handleMouseMove = (e) => {
+      if (!emojiRef.current) return
+      const rect = emojiRef.current.getBoundingClientRect()
+      const cx = rect.left + rect.width / 2
+      const cy = rect.top + rect.height / 2
+      const angle = Math.atan2(e.clientY - cy, e.clientX - cx) * (180 / Math.PI)
+      setEmoji(directional[Math.round((angle + 180) / 45) % 8])
+    }
+    window.addEventListener('mousemove', handleMouseMove)
+    return () => window.removeEventListener('mousemove', handleMouseMove)
+  }, [])
 
   useEffect(() => {
     const hash = window.location.hash
@@ -34,7 +50,7 @@ export default function HomeClient({ welcomeMessage, educationMessage, blogs, ex
       {/* Navbar */}
       <header className="sticky top-0 bg-slate-900 border-b border-slate-700 w-full z-10">
         <nav className="px-6 py-4 flex justify-between items-center">
-          <h1 className="font-display text-2xl font-bold text-sky-400">Alex Lu</h1>
+          <a href="#intro" className="font-display text-2xl font-bold text-sky-400">Alex Lu</a>
 
           {/* Desktop nav */}
           <ul className="hidden md:flex gap-8 text-base text-slate-300">
@@ -86,8 +102,9 @@ export default function HomeClient({ welcomeMessage, educationMessage, blogs, ex
         <div className="flex flex-col md:flex-row items-center justify-center gap-6 sm:gap-8">
           <div className="flex-1 text-center">
             <p className="text-base sm:text-lg text-slate-400 mb-4">{educationMessage}</p>
-            <p className="font-display text-2xl sm:text-3xl font-bold mb-2">{welcomeMessage}</p>
-          </div>
+            <p className="font-display text-2xl sm:text-3xl font-bold mb-4">{welcomeMessage}</p>
+            <span ref={emojiRef} className="text-4xl">{emoji}</span>
+</div>
           <div className="flex-1 w-full flex justify-center md:justify-end items-center">
             <img src="/images/iooo.png" alt="Alex Lu" className="w-image max-w-image aspect-square object-cover rounded-lg shadow-lg" />
           </div>
