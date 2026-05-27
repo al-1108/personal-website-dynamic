@@ -1,6 +1,7 @@
 'use client'
 
 import { useEffect, useRef, useState } from 'react'
+import { useRouter } from 'next/navigation'
 import Link from 'next/link'
 
 const GitHubIcon = () => (
@@ -10,18 +11,26 @@ const GitHubIcon = () => (
 )
 
 const navLinks = [
-  { href: '#intro', label: 'home' },
-  { href: '#experience', label: 'experience' },
-  { href: '#projects', label: 'projects' },
-  { href: '#skills', label: 'skills' },
-  { href: '#blogs', label: 'blogs' },
-  { href: '#contact', label: 'contact' },
+  { href: '#intro', label: 'Home' },
+  { href: '#experience', label: 'Experience' },
+  { href: '#projects', label: 'Projects' },
+  { href: '#skills', label: 'Skills' },
+  { href: '#blogs', label: 'Blogs' },
+  { href: '#contact', label: 'Contact' },
 ]
 
 export default function HomeClient({ welcomeMessage, educationMessage, blogs, experiences, skills, projects }) {
+  const router = useRouter()
   const [menuOpen, setMenuOpen] = useState(false)
   const [emoji, setEmoji] = useState('🙈')
   const emojiRef = useRef(null)
+
+  useEffect(() => {
+    const missing = !welcomeMessage || !educationMessage || !blogs.length || !projects.length
+    if (!missing) return
+    const timer = setTimeout(() => router.refresh(), 2000)
+    return () => clearTimeout(timer)
+  }, [welcomeMessage, educationMessage, blogs, projects, router])
 
   useEffect(() => {
     const directional = ['🌝', '🧐', '🙄', '🥴', '😒', '🫠', '😔', '🐤']
@@ -103,7 +112,7 @@ export default function HomeClient({ welcomeMessage, educationMessage, blogs, ex
           <div className="flex-1 text-center">
             <p className="text-base sm:text-lg text-slate-400 mb-4">{educationMessage}</p>
             <p className="font-display text-2xl sm:text-3xl font-bold mb-4">{welcomeMessage}</p>
-            <span ref={emojiRef} className="font-display font-bold text-4xl">{emoji}</span>
+            {/* <span ref={emojiRef} className="font-display font-bold text-4xl">{emoji}</span> */}
 </div>
           <div className="flex-1 w-full flex justify-center md:justify-end items-center">
             <img src="/images/iooo.png" alt="Alex Lu" className="w-image max-w-image aspect-square object-cover rounded-lg shadow-lg" />

@@ -9,14 +9,7 @@ export default async function Page() {
     process.env.SUPABASE_ANON_KEY
   )
 
-  const [
-    { data: welcomeData },
-    { data: educationData },
-    { data: blogs },
-    { data: experiences },
-    { data: skills },
-    { data: projects},
-  ] = await Promise.all([
+  const results = await Promise.allSettled([
     supabase.from('welcome').select('message').single(),
     supabase.from('education').select('message').single(),
     supabase.from('blogs').select('slug, title, description, date').order('date', { ascending: false }),
@@ -24,6 +17,10 @@ export default async function Page() {
     supabase.from('skills').select('languages').single(),
     supabase.from('projects').select('id, years, title, desc, github, image').order('id', { ascending: false }),
   ])
+
+  const [welcomeData, educationData, blogs, experiences, skills, projects] = results.map(
+    r => r.status === 'fulfilled' ? r.value.data : null
+  )
 
   return (
     <HomeClient
