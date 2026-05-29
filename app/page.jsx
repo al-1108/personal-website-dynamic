@@ -10,7 +10,7 @@ export default async function Page() {
   )
 
   const results = await Promise.allSettled([
-    supabase.from('welcome').select('message').single(),
+    supabase.from('welcome').select('message, image').single(),
     supabase.from('education').select('message').single(),
     supabase.from('blogs').select('slug, title, description, date').order('date', { ascending: false }),
     supabase.from('experiences').select('id, years, title, company, bullets').order('id', { ascending: false }).limit(2),
@@ -25,6 +25,7 @@ export default async function Page() {
   return (
     <HomeClient
       welcomeMessage={welcomeData?.message ?? ''}
+      alexImage={welcomeData?.image ?? ''}
       educationMessage={educationData?.message ?? ''}
       blogs={blogs ?? []}
       experiences={experiences ?? []}

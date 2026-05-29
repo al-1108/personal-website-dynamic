@@ -19,7 +19,7 @@ const navLinks = [
   { href: '#contact', label: 'Contact' },
 ]
 
-export default function HomeClient({ welcomeMessage, educationMessage, blogs, experiences, skills, projects }) {
+export default function HomeClient({ welcomeMessage, alexImage,educationMessage, blogs, experiences, skills, projects }) {
   const router = useRouter()
   const [menuOpen, setMenuOpen] = useState(false)
   const [emoji, setEmoji] = useState('🙈')
@@ -115,7 +115,7 @@ export default function HomeClient({ welcomeMessage, educationMessage, blogs, ex
             {/* <span ref={emojiRef} className="font-display font-bold text-4xl">{emoji}</span> */}
 </div>
           <div className="flex-1 w-full flex justify-center md:justify-end items-center">
-            <img src="/images/iooo.png" alt="Alex Lu" className="w-image max-w-image aspect-square object-cover rounded-lg shadow-lg" />
+            <img src={`/images/${alexImage}`} alt="Alex Lu" className="w-image max-w-image aspect-square object-cover rounded-lg shadow-lg" />
           </div>
         </div>
       </div>
