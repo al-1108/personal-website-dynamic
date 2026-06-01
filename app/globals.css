@@ -3,6 +3,5 @@
 @tailwind utilities;
 
 html, body {
-  @apply bg-slate-900;
   margin: 0;
 }
