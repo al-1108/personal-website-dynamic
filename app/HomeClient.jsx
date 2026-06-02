@@ -80,7 +80,7 @@ export default function HomeClient({ welcomeMessage, alexImage, educationMessage
   return (
     <div className="min-h-screen">
       {/* Navbar */}
-      <header className="sticky top-0 bg-white dark:bg-slate-900 border-b border-slate-200 dark:border-slate-700 w-full z-10">
+      <header className="sticky top-0 bg-slate-50 dark:bg-slate-900 border-b border-slate-200 dark:border-slate-700 w-full z-10">
         <nav className="px-6 py-4 flex justify-between items-center">
           <div className="flex items-center gap-3">
             <a href="#intro" className="font-display text-2xl font-bold text-sky-400">Alex Lu</a>
@@ -214,7 +214,7 @@ export default function HomeClient({ welcomeMessage, alexImage, educationMessage
         <h2 className="font-display text-2xl sm:text-3xl font-bold mb-8 text-slate-900 dark:text-white">Blogs</h2>
         <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-4">
           {blogs.map((post) => (
-            <Link key={post.slug} href={`/blogs/${post.slug}`} className="bg-white dark:bg-slate-800 flex flex-col justify-between border border-slate-200 dark:border-slate-700 rounded-xl p-4 shadow-sm dark:shadow-none hover:border-sky-500 hover:shadow-md dark:hover:shadow-sky-900/20 transition group">
+            <Link key={post.slug} href={`/blogs/${post.slug}`} className="bg-slate-200 dark:bg-slate-800 flex flex-col justify-between border border-slate-300 dark:border-slate-700 rounded-xl p-4 shadow-sm dark:shadow-none hover:border-sky-500 hover:shadow-md dark:hover:shadow-sky-900/20 transition group">
               <div>
                 <p className="text-sm text-slate-500 dark:text-slate-400 mb-2">{post.date}</p>
                 <h3 className="font-display text-xl font-bold mb-3 text-slate-900 dark:text-white group-hover:text-sky-400 transition">{post.title}</h3>
