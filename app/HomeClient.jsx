@@ -56,20 +56,6 @@ export default function HomeClient({ welcomeMessage, alexImage, educationMessage
   }
 
   useEffect(() => {
-    const directional = ['🌝', '🧐', '🙄', '🥴', '😒', '🫠', '😔', '🐤']
-    const handleMouseMove = (e) => {
-      if (!emojiRef.current) return
-      const rect = emojiRef.current.getBoundingClientRect()
-      const cx = rect.left + rect.width / 2
-      const cy = rect.top + rect.height / 2
-      const angle = Math.atan2(e.clientY - cy, e.clientX - cx) * (180 / Math.PI)
-      setEmoji(directional[Math.round((angle + 180) / 45) % 8])
-    }
-    window.addEventListener('mousemove', handleMouseMove)
-    return () => window.removeEventListener('mousemove', handleMouseMove)
-  }, [])
-
-  useEffect(() => {
     const hash = window.location.hash
     if (hash) {
       const el = document.querySelector(hash)
