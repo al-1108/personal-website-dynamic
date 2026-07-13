@@ -138,6 +138,17 @@ export default function HomeClient({ welcomeMessage, alexImage, educationMessage
           <div className="flex-1 text-center">
             <p className="text-base sm:text-lg text-slate-500 dark:text-slate-400 mb-4">{educationMessage}</p>
             <p className="font-display text-2xl sm:text-3xl font-bold mb-4 text-slate-900 dark:text-white">{welcomeMessage}</p>
+            <iframe
+              data-testid="embed-iframe"
+              style={{ borderRadius: 12 }}
+              src="https://open.spotify.com/embed/track/5UAGQJmL7Rn4gn7wlkMyqS?utm_source=generator&si=88435baa82fe4a59"
+              width="100%"
+              height={150}
+              frameBorder={0}
+              allowFullScreen=""
+              allow="autoplay; clipboard-write; encrypted-media; fullscreen; picture-in-picture"
+              loading="lazy"
+            />
           </div>
           <div className="flex-1 w-full flex justify-center md:justify-end items-center">
             <img src={`/images/${alexImage}`} alt="Alex Lu" className="w-image max-w-image aspect-square object-cover rounded-lg shadow-lg" />
