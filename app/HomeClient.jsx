@@ -135,14 +135,15 @@ export default function HomeClient({ welcomeMessage, alexImage, educationMessage
       {/* Intro */}
       <div id="intro" className="scroll-mt-16 max-w-4xl mx-auto px-6 py-12 sm:py-20">
         <div className="flex flex-col md:flex-row items-center justify-center gap-6 sm:gap-8">
-          <div className="flex-1 text-center">
+          <div className="flex-1 text-center md:translate-y-5">
             <p className="text-base sm:text-lg text-slate-500 dark:text-slate-400 mb-4">{educationMessage}</p>
             <p className="font-display text-2xl sm:text-3xl font-bold mb-4 text-slate-900 dark:text-white">{welcomeMessage}</p>
             <iframe
+              className="mx-auto"
               data-testid="embed-iframe"
               style={{ borderRadius: 12 }}
               src="https://open.spotify.com/embed/track/5UAGQJmL7Rn4gn7wlkMyqS?utm_source=generator&si=88435baa82fe4a59"
-              width="100%"
+              width={300}
               height={150}
               frameBorder={0}
               allowFullScreen=""
