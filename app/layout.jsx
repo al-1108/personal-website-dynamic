@@ -1,18 +1,34 @@
-import { Inter, Space_Grotesk } from 'next/font/google'
+import { Fraunces, Geist, Geist_Mono } from 'next/font/google'
+import Script from 'next/script'
 import './globals.css'
 
-const inter = Inter({ subsets: ['latin'], variable: '--font-inter' })
-const spaceGrotesk = Space_Grotesk({ subsets: ['latin'], weight: ['700'], variable: '--font-space-grotesk' })
+const geist = Geist({ subsets: ['latin'], variable: '--font-geist' })
+const geistMono = Geist_Mono({ subsets: ['latin'], variable: '--font-geist-mono' })
+const fraunces = Fraunces({
+  subsets: ['latin'],
+  weight: 'variable',
+  style: ['normal', 'italic'],
+  axes: ['opsz'],
+  variable: '--font-fraunces',
+})
 
 export const metadata = {
   title: 'Alex Lu',
-  icons: { icon: '/images/logo.png' },
+  description: 'Alex Lu. Incoming computer science student at the University of Waterloo, robotics programmer, occasional blogger.',
+  icons: { icon: '/favicon.svg' },
 }
+
+// Runs before first paint so the saved theme applies without a flash.
+// Falls back to the system preference when nothing has been saved.
+const themeScript = `(function(){try{var t=localStorage.getItem('theme');var d=t?t==='dark':matchMedia('(prefers-color-scheme: dark)').matches;if(d)document.documentElement.classList.add('dark')}catch(e){}})()`
 
 export default function RootLayout({ children }) {
   return (
-    <html lang="en" className={`dark scroll-smooth ${inter.variable} ${spaceGrotesk.variable}`}>
-      <body className="bg-slate-50 dark:bg-slate-900 text-slate-900 dark:text-slate-100">{children}</body>
+    <html lang="en" suppressHydrationWarning className={`${geist.variable} ${geistMono.variable} ${fraunces.variable}`}>
+      <head>
+        <Script id="theme" strategy="beforeInteractive">{themeScript}</Script>
+      </head>
+      <body className="min-h-screen bg-paper font-sans text-ink antialiased">{children}</body>
     </html>
   )
 }

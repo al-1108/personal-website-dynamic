@@ -1,18 +1,31 @@
-# React + Vite
+# Alex Lu — personal site
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+Personal site for Alex Lu. Next.js app router, Tailwind, and Supabase for content.
 
-Currently, two official plugins are available:
+## Running locally
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Oxc](https://oxc.rs)
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/)
+```sh
+npm install
+npm run dev
+```
 
-## React Compiler
+Create `.env.local` with the Supabase project URL and anon key:
 
-The React Compiler is enabled on this template. See [this documentation](https://react.dev/learn/react-compiler) for more information.
+```
+SUPABASE_URL=...
+SUPABASE_ANON_KEY=...
+```
 
-Note: This will impact Vite dev & build performances.
+## Where things live
 
-## Expanding the ESLint configuration
+- `app/page.jsx` – home page; reads every section from Supabase on each request
+- `app/experience/page.jsx` – full experience list
+- `app/blogs/[slug]/page.jsx` – blog post; paragraphs split on blank lines, media is an image or a YouTube Short
+- `app/components/` – header, footer, section wrapper, theme toggle, mobile nav
+- `app/globals.css` – colour tokens for the light and dark themes
+- `app/api/keep-alive/` – pinged daily by a Vercel cron so the free Supabase project stays awake
+- `supabase/migrations/` – schema changes
 
-If you are developing a production application, we recommend using TypeScript with type-aware lint rules enabled. Check out the [TS template](https://github.com/vitejs/vite/tree/main/packages/create-vite/template-react-ts) for information on how to integrate TypeScript and [`typescript-eslint`](https://typescript-eslint.io) in your project.
+## Content tables
+
+`welcome`, `education`, `skills`, `experiences`, `projects`, `blogs`. Images referenced by these rows live in `public/images/`.

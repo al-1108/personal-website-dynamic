@@ -2,6 +2,94 @@
 @tailwind components;
 @tailwind utilities;
 
-html, body {
-  margin: 0;
+:root {
+  --paper: #f4f1ea;
+  --paper-2: #e9e4da;
+  --ink: #1b1a18;
+  --ink-2: #45413b;
+  --muted: #7d7669;
+  --line: #d6cfc2;
+  --accent: #b4472a;
+  color-scheme: light;
+}
+
+.dark {
+  --paper: #121110;
+  --paper-2: #1c1a17;
+  --ink: #ece7de;
+  --ink-2: #dcd6cb;
+  --muted: #ada597;
+  --line: #2b2825;
+  --accent: #e2835f;
+  color-scheme: dark;
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+body {
+  background-color: var(--paper);
+  color: var(--ink);
+  -webkit-font-smoothing: antialiased;
+  text-rendering: optimizeLegibility;
+}
+
+::selection {
+  background-color: var(--accent);
+  color: var(--paper);
+}
+
+:focus-visible {
+  outline: 1.5px solid var(--accent);
+  outline-offset: 3px;
+}
+
+/* Bulleted lists drawn with an en dash instead of a disc. */
+.dash-list li {
+  position: relative;
+  padding-left: 1.5rem;
+}
+.dash-list li::before {
+  content: '\2013';
+  position: absolute;
+  left: 0;
+  color: var(--muted);
+}
+
+/* Text links: hairline underline that turns to the accent on hover. */
+.link {
+  text-decoration: underline;
+  text-decoration-thickness: 1px;
+  text-underline-offset: 0.3em;
+  text-decoration-color: var(--line);
+  transition: text-decoration-color 150ms ease, color 150ms ease;
+}
+.link:hover {
+  text-decoration-color: var(--accent);
+  color: var(--accent);
+}
+
+/* Intro layout. Narrow screens put the portrait beside the label and
+   location; wide screens move it to a full-height right column. */
+.hero {
+  display: grid;
+  grid-template-columns: auto 1fr;
+  grid-template-areas:
+    'portrait label'
+    'portrait meta'
+    'title title';
+  column-gap: 1.25rem;
+  align-items: start;
+}
+@media (min-width: 768px) {
+  .hero {
+    grid-template-columns: 1fr auto;
+    grid-template-areas:
+      'label portrait'
+      'title portrait'
+      'meta portrait';
+    column-gap: 4rem;
+    align-items: end;
+  }
 }

@@ -1,7 +1,8 @@
 import { createClient } from '@supabase/supabase-js'
-import Link from 'next/link'
 import { notFound } from 'next/navigation'
-import ThemeToggle from '../../ThemeToggle'
+import SiteHeader from '../../components/SiteHeader'
+import SiteFooter from '../../components/SiteFooter'
+import { formatDate, paragraphs } from '../../lib/format'
 
 export const dynamic = 'force-dynamic'
 
@@ -45,11 +46,18 @@ function getYouTubeMediaUrls(youtubeUrl) {
 function BlogMedia({ image, imageDescription, youtubeUrl, title }) {
   if (image) {
     return (
-      <img
-        src={`/images/${image}`}
-        alt={imageDescription || title}
-        className="w-[45%] rounded-lg shadow-lg mx-auto block"
-      />
+      <figure className="max-w-sm">
+        <img
+          src={`/images/${image}`}
+          alt={imageDescription || title}
+          className="w-full rounded-sm border border-line"
+        />
+        {imageDescription && (
+          <figcaption className="mt-3 font-mono text-[11px] uppercase tracking-[0.18em] text-muted">
+            {imageDescription}
+          </figcaption>
+        )}
+      </figure>
     )
   }
 
@@ -57,8 +65,8 @@ function BlogMedia({ image, imageDescription, youtubeUrl, title }) {
 
   if (embedUrl) {
     return (
-      <figure className="mx-auto w-full max-w-[420px]">
-        <div className="relative aspect-[9/16] overflow-hidden rounded-xl bg-slate-100 shadow-lg dark:bg-slate-800">
+      <figure className="max-w-sm">
+        <div className="relative aspect-[9/16] overflow-hidden rounded-sm border border-line bg-paper-2">
           <iframe
             src={embedUrl}
             title={`${title} YouTube Short`}
@@ -69,13 +77,9 @@ function BlogMedia({ image, imageDescription, youtubeUrl, title }) {
             referrerPolicy="strict-origin-when-cross-origin"
           />
         </div>
-        <figcaption className="mt-3 text-center text-sm">
-          <a
-            href={externalUrl}
-            target="_blank"
-            rel="noopener noreferrer"
-            className="text-sky-600 hover:underline dark:text-sky-400"
-          >
+        <figcaption className="mt-3 font-mono text-[11px] uppercase tracking-[0.18em] text-muted">
+          <a href={externalUrl} target="_blank" rel="noopener noreferrer" className="link">
+            Watch on YouTube ↗
           </a>
         </figcaption>
       </figure>
@@ -84,13 +88,9 @@ function BlogMedia({ image, imageDescription, youtubeUrl, title }) {
 
   if (externalUrl) {
     return (
-      <p className="text-center">
-        <a
-          href={externalUrl}
-          target="_blank"
-          rel="noopener noreferrer"
-          className="text-sky-600 hover:underline dark:text-sky-400"
-        >
+      <p className="font-mono text-[11px] uppercase tracking-[0.18em] text-muted">
+        <a href={externalUrl} target="_blank" rel="noopener noreferrer" className="link">
+          Watch on YouTube ↗
         </a>
       </p>
     )
@@ -99,12 +99,17 @@ function BlogMedia({ image, imageDescription, youtubeUrl, title }) {
   return null
 }
 
+export async function generateMetadata({ params }) {
+  const { slug } = await params
+  const supabase = createClient(process.env.SUPABASE_URL, process.env.SUPABASE_ANON_KEY)
+  const { data: post } = await supabase.from('blogs').select('title, description').eq('slug', slug).single()
+  if (!post) return { title: 'Alex Lu' }
+  return { title: `${post.title} | Alex Lu`, description: post.description }
+}
+
 export default async function BlogPost({ params }) {
   const { slug } = await params
-  const supabase = createClient(
-    process.env.SUPABASE_URL,
-    process.env.SUPABASE_ANON_KEY
-  )
+  const supabase = createClient(process.env.SUPABASE_URL, process.env.SUPABASE_ANON_KEY)
 
   const { data: post } = await supabase
     .from('blogs')
@@ -115,32 +120,32 @@ export default async function BlogPost({ params }) {
   if (!post) notFound()
 
   return (
-    <div className="min-h-screen">
-      <header className="sticky top-0 bg-white dark:bg-slate-900 border-b border-slate-200 dark:border-slate-700 w-full z-10">
-        <nav className="px-6 py-4 flex justify-between items-center">
-          <div className="flex items-center gap-3">
-            <Link href="/" className="font-display text-2xl font-bold text-sky-400">Alex Lu</Link>
-            <ThemeToggle />
-          </div>
-          <a href="/#blogs" className="text-slate-600 dark:text-slate-300 hover:text-sky-400 transition text-base hover:scale-110 inline-block origin-center hover:underline">← Back to Blogs</a>
-        </nav>
-      </header>
+    <>
+      <SiteHeader back={{ href: '/#writing', label: 'Back to writing' }} />
 
-      <article className="max-w-2xl mx-auto px-6 py-12 sm:py-20">
-        <p className="text-sm text-slate-500 dark:text-slate-400 mb-3">{post.date}</p>
-        <h1 className="font-display text-4xl sm:text-5xl font-bold mb-8 text-slate-900 dark:text-white">{post.title}</h1>
-        <div className="text-slate-700 dark:text-slate-300 leading-relaxed space-y-6">
-          {post.content}
-        </div>
-        <div className="mt-12">
-          <BlogMedia
-            image={post.image}
-            imageDescription={post['image-desc']}
-            youtubeUrl={post.youtube_url}
-            title={post.title}
-          />
-        </div>
-      </article>
-    </div>
+      <main className="mx-auto max-w-site px-6 py-16 sm:px-8 sm:py-24">
+        <article className="max-w-2xl">
+          <p className="font-mono text-[11px] uppercase tracking-[0.18em] text-muted">{formatDate(post.date)}</p>
+          <h1 className="mt-4 font-display text-5xl leading-[1.02] tracking-tight text-ink sm:text-6xl">{post.title}</h1>
+
+          <div className="mt-12 space-y-6 text-[17px] leading-[1.7] text-ink-2">
+            {paragraphs(post.content).map((text, i) => (
+              <p key={i}>{text}</p>
+            ))}
+          </div>
+
+          <div className="mt-14 border-t border-line pt-10">
+            <BlogMedia
+              image={post.image}
+              imageDescription={post['image-desc']}
+              youtubeUrl={post.youtube_url}
+              title={post.title}
+            />
+          </div>
+        </article>
+      </main>
+
+      <SiteFooter />
+    </>
   )
 }
