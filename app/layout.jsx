@@ -14,7 +14,7 @@ const fraunces = Fraunces({
 
 export const metadata = {
   title: 'Alex Lu',
-  description: 'Alex Lu. Incoming computer science student at the University of Waterloo, robotics programmer, occasional blogger.',
+  description: 'Alex Lu, a Computer science student at the University of Waterloo.',
   icons: { icon: '/favicon.svg' },
 }
 
