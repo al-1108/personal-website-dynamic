@@ -24,7 +24,7 @@ const themeScript = `(function(){try{var t=localStorage.getItem('theme');var d=t
 
 export default function RootLayout({ children }) {
   return (
-    <html lang="en" suppressHydrationWarning className={`${geist.variable} ${geistMono.variable} ${fraunces.variable}`}>
+    <html lang="en" suppressHydrationWarning data-scroll-behavior="smooth" className={`${geist.variable} ${geistMono.variable} ${fraunces.variable}`}>
       <head>
         <Script id="theme" strategy="beforeInteractive">{themeScript}</Script>
       </head>
